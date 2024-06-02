@@ -14,8 +14,20 @@ def connect_to_db():
     )'''
     conn = psycopg2.connect(os.environ["DB_URL"])
     return conn
+conn = connect_to_db()
+cur = conn.cursor()
 
+cur.execute('DROP TABLE IF EXISTS medicine')
+cur.execute('CREATE TABLE medicine ('
+             'medicine_name varchar(150) PRIMARY KEY,'
+             'bag_name varchar(100) NOT NULL,'
+             'description text,'
+             'expiry TIMESTAMP)')
 
+conn.commit()
+
+cur.close()
+conn.close()
 @app.route("/", methods=["GET", "POST"])
 @app.route("/medlist", methods=["GET", "POST"])
 def fetch_medicine():
