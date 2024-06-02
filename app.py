@@ -12,7 +12,7 @@ def connect_to_db():
     #     user=os.environ["DB_USERNAME"],
     #     password=os.environ["DB_PASSWORD"],
     # )
-    conn = psycopg2.connect(os.environ["db_url"])
+    conn = psycopg2.connect(os.environ.get("db_url"))
     return conn
 
 
