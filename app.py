@@ -29,6 +29,7 @@ def fetch_medicine():
                 VALUES (%(medicine_name)s, %(bag_name)s, %(description)s, to_date(%(expiry)s,'MM-YYYY'));
                 """
         cur.execute(query, new_data)
+        conn.commit()
 
     cur.execute(
         "select medicine_name,bag_name,description,to_char(expiry,'Mon YYYY') from medicine;"
